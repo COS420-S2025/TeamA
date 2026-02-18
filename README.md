@@ -28,3 +28,11 @@ noun. "A foolish oaf." or "A silly elf."
 - Students spend a significant amount of time finding this information and copying it into their calendars. 
 - There are solutions that currently address this exact problem but many are paid or use AI. 
 - How can we reduce the time it takes students to complete this task?
+
+### Draft 3
+= The information that a student often looks for in a syllabus is the information about the due dates of assignments and the timeline of assignments.
+= However, this information is often buried under the typical copy-paste format that most syllabi follow.
+= Students spend a significant amount of time finding this information and copying it into their calendars.
+= There are solutions that currently address this exact problem, but are inaccessible to many college students because they are paid.
+= How can we create a free app that allows students to move syllabus deadlines to a digitial calendar in 60 seconds or less?
+
