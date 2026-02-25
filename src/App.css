@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.Body {
+  background-color: #282c34;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding-top: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding-top: 20px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Button {
+  width: 400px;
+  height: 200px;
+  border-radius: 5%;
+  font-size: calc(10px + 2vmin);
+  cursor: pointer;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  color: rgb(251, 239, 177);
+}
+
+
