@@ -8,6 +8,11 @@ function App() {
       <header className="App-header">
           Welcome to Silly Bus
       </header>
+      <p>
+        An App By: <br />
+        <br />
+        Jack Ellingwood, <br />
+      </p>
       <main className = "Body">
         <EntryButton/>
       </main>
