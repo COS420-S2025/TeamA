@@ -1,19 +1,34 @@
 # Team Alcatote
+
 noun. "A foolish oaf." or "A silly elf."
 
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 ## Members
-> Project Manager 
+
+> Project Manager
+
 - Jack Ellingwood
 
-> Designer 
+> Designer
+
 - Dawson Ferguson
 
 > Developers
+
 - John Quinn
 - Drew Turgeon
 - Nicky Keenan
 
 ## Mission Statement
+
 1. Extracting assignment and exam dates from long, informationally dense syllabi is a tedious and time consuming process that makes tracking and logging specific deadlines difficult.
 2. For example, in COS 420, the syllabus includes a variety of information like due dates, office hours, grading scheme, etc. When all syllabi are similarly information-dense, it makes the task of logging due dates tedious and time consuming.
 3. Services such as SylCampus charge a fee to allow you to turn your due dates on syllabi into calendar files.
