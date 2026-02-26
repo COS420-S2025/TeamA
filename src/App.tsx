@@ -8,14 +8,15 @@ function App() {
       <header className="App-header">
           Welcome to Silly Bus
       </header>
-      <p>
-        An App By: <br />
-        <br />
-        Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan<br />
-      </p>
       <main className = "Body">
         <EntryButton/>
       </main>
+      <p className='Footer'>
+        An App By: <br />
+        <br />
+        Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
+      </p>
+
     </div>
   );
 }
