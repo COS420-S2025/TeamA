@@ -11,7 +11,7 @@ function App() {
       <p>
         An App By: <br />
         <br />
-        Jack Ellingwood, Drew Turgeon, Dawson Ferguson<br />
+        Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan<br />
       </p>
       <main className = "Body">
         <EntryButton/>
