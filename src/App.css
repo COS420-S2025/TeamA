@@ -4,7 +4,7 @@
 
 .Body {
   background-color: #282c34;
-  height: 100vh;
+  height: 40vh;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -12,6 +12,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding-top: 20px;
+}
+
+.Footer {
+  background-color: #282c34;
+  height: 20vh;
 }
 
 .App-header {
