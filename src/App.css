@@ -1,5 +1,31 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+}
+
+.DropZone {
+  background-color: #282c34;
+  height: 40vh;
+  width: 500px;
+  margin: auto;
+}
+
+.DateTimeDropdown {
+  position: absolute;
+  top: 330px;
+  left: 930px;
+  color: white;
+}
+
+.OfficeHoursBox {
+  position: absolute;
+  top: 330px;
+  left: 505px;
+
+}
+
+.OfficeHoursText {
+  color: white;
 }
 
 .Body {
@@ -10,7 +36,7 @@
   align-items: flex-start;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #282c34;
   padding-top: 20px;
 }
 
