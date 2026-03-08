@@ -1,12 +1,13 @@
-import React from 'react';
-import './App.css';
+import React, { use, useRef } from 'react';
+import { FilePond } from 'react-filepond';
 import { FileUpload } from './components/FileUpload.tsx';
 import { UploadButton } from './components/UploadButton.tsx';
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { OfficeHoursBox } from './components/OfficeHoursBox.tsx';
 import { DateTimeDropdown } from './components/DateTimeDropdown.tsx';
 import { DownloadButton } from './components/DownloadButton.tsx';
 
+import './App.css';
 
 function DownloadPage(): React.JSX.Element {
   return(
@@ -27,6 +28,7 @@ function DownloadPage(): React.JSX.Element {
 }
 
 function Home(): React.JSX.Element {
+  const pondRef = useRef<FilePond | null>(null);
   return (
     <div className="App">
       <header className="App-header">
@@ -39,8 +41,8 @@ function Home(): React.JSX.Element {
         <DateTimeDropdown/>
       </div>
       <div className='DropZone'>
-        <FileUpload/>
-        <UploadButton/>
+        <FileUpload pondRef={pondRef}/>
+        <UploadButton pondRef={pondRef}/>
       </div>
       <p className='Footer'>
         An App By: <br />
