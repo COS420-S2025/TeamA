@@ -1,11 +1,6 @@
 import { FilePond, registerPlugin } from 'react-filepond';
-import { useRef, useState } from "react";
-import { FilePondFile } from 'filepond'
-
-
-
+import { useState } from "react";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
-import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 
 import "filepond/dist/filepond.min.css"
 
@@ -14,15 +9,7 @@ interface FileUploadProps {
 }
 
 // Enable the plugin for file type validation
-registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode)
-
-export function fileToBase64(files: FilePondFile[]): string[] {
-  let strArr: string[] = [];
-  for (let i: number = 0; i < files.length; i++) {
-    strArr[i] = (files[i].getFileEncodeBase64String());
-  }
-  return strArr;
-}
+registerPlugin(FilePondPluginFileValidateType)
 
 export function FileUpload({ pondRef }: FileUploadProps): React.JSX.Element {
     // Set up state for File Pond

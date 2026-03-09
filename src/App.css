@@ -10,6 +10,11 @@
   margin: auto;
 }
 
+.UploadButton {
+  position: relative;
+  top: -170px;
+}
+
 .DateTimeDropdown {
   position: relative;
   top: -20px;
