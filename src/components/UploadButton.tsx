@@ -11,10 +11,11 @@ export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element 
     // Setup navigate
     const navigate = useNavigate()
     // Navigate to download page when clicked
-    // const handleClick = () => {navigate("/downloadPage")}
+    const handleClick = () => {navigate("/downloadPage")}
     ParsePdfToText(pondRef)
+    // ()=>ParsePdfToText(pondRef)
     return(
-        <button onClick={(()=>ParsePdfToText(pondRef))}>
+        <button onClick={handleClick}>
         Create Schedule
         </button>)
 }

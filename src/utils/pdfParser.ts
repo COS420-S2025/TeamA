@@ -2,6 +2,7 @@ import { FilePond } from 'react-filepond';
 import { PDFParse } from 'pdf-parse';
 import { fileToBase64 } from '../components/FileUpload';
 import { FilePondFile } from 'filepond';
+import * as pdfjsLib from 'pdfjs-dist';
 
 interface ParserProps {
     pondRef: React.RefObject<FilePond| null>;

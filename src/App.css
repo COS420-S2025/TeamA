@@ -11,16 +11,16 @@
 }
 
 .DateTimeDropdown {
-  position: absolute;
-  top: 330px;
-  left: 930px;
+  position: relative;
+  top: -20px;
+  left: 200px;
   color: white;
 }
 
 .OfficeHoursBox {
-  position: absolute;
-  top: 330px;
-  left: 505px;
+  position: relative;
+  top: 0px;
+  left: -170px;
 
 }
 
@@ -31,6 +31,7 @@
 .Body {
   background-color: #282c34;
   height: 40vh;
+  width: 1500px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
