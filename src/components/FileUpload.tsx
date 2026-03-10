@@ -3,7 +3,7 @@ import { useState } from "react";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 
 import "filepond/dist/filepond.min.css"
-
+// Chat GPT assited with how to pass the reference and that I needed to create an interface
 interface FileUploadProps {
   pondRef: React.RefObject<FilePond | null>;
 }

@@ -2,6 +2,7 @@ import { FilePond } from 'react-filepond';
 import { ParsePdfToText } from "../utils/pdfParser";
 import { useNavigate } from "react-router-dom"
 
+// Chat GPT assited with how to pass the reference and that I needed to create an interface
 interface UploadButtonProps {
     pondRef: React.RefObject<FilePond | null>;
 }

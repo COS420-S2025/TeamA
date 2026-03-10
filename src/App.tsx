@@ -5,9 +5,9 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { OfficeHoursBox } from './components/OfficeHoursBox.tsx';
 import { DateTimeDropdown } from './components/DateTimeDropdown.tsx';
 import { DownloadButton } from './components/DownloadButton.tsx';
-
-import './App.css';
 import { UploadButton } from './components/UploadButton.tsx';
+import './App.css';
+
 
 function DownloadPage(): React.JSX.Element {
   return(
@@ -55,6 +55,7 @@ function Home(): React.JSX.Element {
 
 function App() {
   return (
+    // Chat GPT assited with how to set this up
     // Initialize Browser Router
     <BrowserRouter>
     {/* Set up Routes */}

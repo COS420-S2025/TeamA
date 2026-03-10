@@ -3,6 +3,8 @@ import { FilePond } from 'react-filepond';
 import pdfToText from 'react-pdftotext'
 
 // pass the pondRef reference object
+// VSCode quick fix told me to make this function async and to use await
+// this is because pdfToText() returns type promise<string>
 export async function ParsePdfToText(pondRef: React.RefObject<FilePond | null>) {
     // Define the variable to store the results in
     let results: string[] = [];
