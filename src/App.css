@@ -1,16 +1,48 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+}
+
+.DropZone {
+  background-color: #282c34;
+  height: 40vh;
+  width: 500px;
+  margin: auto;
+}
+
+.UploadButton {
+  position: relative;
+  top: -170px;
+}
+
+.DateTimeDropdown {
+  position: relative;
+  top: -20px;
+  left: 200px;
+  color: white;
+}
+
+.OfficeHoursBox {
+  position: relative;
+  top: 0px;
+  left: -170px;
+
+}
+
+.OfficeHoursText {
+  color: white;
 }
 
 .Body {
   background-color: #282c34;
   height: 40vh;
+  width: 1500px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #282c34;
   padding-top: 20px;
 }
 
