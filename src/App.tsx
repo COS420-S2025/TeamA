@@ -55,7 +55,6 @@ function Home(): React.JSX.Element {
 
 function App() {
   return (
-    // Chat GPT assited with how to set this up
     // Initialize Browser Router
     <BrowserRouter>
     {/* Set up Routes */}
