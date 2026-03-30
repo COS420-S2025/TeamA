@@ -6,6 +6,7 @@ import { OfficeHoursBox } from './components/OfficeHoursBox.tsx';
 import { DateTimeDropdown } from './components/DateTimeDropdown.tsx';
 import { DownloadButton } from './components/DownloadButton.tsx';
 import { UploadButton } from './components/UploadButton.tsx';
+import { TextBox } from './components/TextBox.tsx'
 import './App.css';
 
 
@@ -15,6 +16,42 @@ function DownloadPage(): React.JSX.Element {
       <header className='App-header'>
         Download Page
       </header>
+      <header className='Sub-Header'>
+        Add New Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY" />
+      </div>
+
+      <div className="Form-Row">
+          <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"' />
+          <TextBox className="Tag-Box" placeholder='e.g. "Assignment"' />
+          
+      </div>
+      <div className="Form-Row">
+        <button className="Manual-Add">Add Event</button>
+      </div>
+    </div>
+    <header className='Sub-Header'>
+        Edit Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY" />
+      </div>
+
+      <div className="Form-Row">
+          <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"' />
+          <TextBox className="Tag-Box" placeholder='e.g. "Assignment"' />
+          
+      </div>
+      <div className="Form-Row">
+        <button className="Confirm-Edit">Edit Event</button>
+      </div>
+    </div>
       <div className='Body'>
         <DownloadButton/>
       </div>
@@ -33,6 +70,9 @@ function Home(): React.JSX.Element {
     <div className="App">
       <header className="App-header">
           Welcome to Semester Sort
+      </header>
+      <header className="App-Description">
+          Upload your course syllabu and build an exportable schdule to add to your calendar
       </header>
       <div className='OfficeHoursBox'>
         <OfficeHoursBox/>
