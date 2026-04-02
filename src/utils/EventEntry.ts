@@ -5,6 +5,7 @@ export class EventEntry {
     private name: String;
     private description: String;
     private date: Date;
+    private tags: Set<String>;
 
     //getters for EventEntry variables
     getName() {
@@ -17,6 +18,10 @@ export class EventEntry {
 
     getDate() {
         return this.date;
+    }
+
+    getTags() {
+        return this.tags;
     }
 
     constructor ( name: String, description: String, date: Date ) {
@@ -36,6 +41,18 @@ export class EventEntry {
 
     setDate(date: Date) {
         this.date = date;
+    }
+
+    setTags(tags: Set<String>) {
+        this.tags = tags;
+    }
+
+    addTag ( tag: String ) { //function to add a tag to the event
+        this.tags.add ( tag );
+    }
+
+    removeTag ( tag: String ) { //function to remove a tag from the event
+        this.tags.delete ( tag );
     }
 
 }
