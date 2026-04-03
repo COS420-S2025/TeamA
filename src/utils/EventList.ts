@@ -24,12 +24,24 @@ export class EventList {
 
     //function to add an event to the list
     addData ( event: EventEntry ) {
-        return 0;
+
+        event = new EventEntry ( event.getName(), event.getDescription(), event.getDate() );
+        this.events.push ( event );
+
+        return "Event: " + event.getName() + " Added";
+
     }
 
     //function to remove an event from the list
     removeData ( index: number ) {
-        return 0;
+        
+        for ( let i: number = 0; i < this.events.length; i++ ) {
+            if ( i === index ) {
+                this.events.splice ( i, 1 );
+                return "Event: " + this.events[i].getName() + " Removed";
+            }
+        }
+        return "Error: Event Not Found";
     }
 
     //function to export the events as an ICS file
