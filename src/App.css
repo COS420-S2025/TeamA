@@ -53,12 +53,12 @@
 
 .App-header {
   background-color: #282c34;
-  height: 40vh;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(20px + 2vmin);
   color: white;
   padding-top: 20px;
 }
@@ -79,4 +79,106 @@
   color: rgb(251, 239, 177);
 }
 
+.App-Description {
+  background-color: #282c34;
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: white;
+  padding-top: 20px;
+}
 
+.Sub-Header {
+  background-color: #282c34;
+  height: 3vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(1px + 2vmin);
+  color: white;
+  padding-top: 50px;
+}
+
+.Form-Container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: center;
+}
+
+
+.Form-Row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px; 
+    justify-content: center;
+}
+
+
+.Textbox-Container {
+    width: 200px;
+}
+
+.Textbox-Container {
+    margin: 12px 0;
+}
+
+.Textbox-Header::before {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.Textbox-Input {
+    padding: 6px;
+    border: 1px solid #ccc;
+}
+
+.Textbox-Input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.Date-Box .Textbox-Header::before {
+    content: "Date";
+}
+
+.Name-Box .Textbox-Header::before {
+    content: "Name";
+}
+
+.Description-Box .Textbox-Header::before {
+    content: "Description";
+}
+
+.Tag-Box .Textbox-Header::before {
+    content: "Tags";
+}
+
+.Manual-Add {
+  width: 195px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: rgb(155, 130, 130);
+  justify-content: center;
+  justify-self: start;
+  align-items: center;
+  color: rgb(0, 0, 0);
+}
+
+.Confirm-Edit {
+  width: 195px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: rgb(155, 130, 130);
+  justify-content: center;
+  justify-self: start;
+  align-items: center;
+  color: rgb(0, 0, 0);
+}
