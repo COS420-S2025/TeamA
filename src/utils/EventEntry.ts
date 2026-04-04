@@ -2,56 +2,57 @@
 //EventEntry object to store the different events and their corresponding functions
 
 export class EventEntry {
-    private name: String;
-    private description: String;
+    private name: string;
+    private description: string;
     private date: Date;
-    private tags: Set<String>;
+    private tags: Set<string>;
 
     //getters for EventEntry variables
-    getName() {
+    getName(): string {
         return this.name;
     }
 
-    getDescription() {
+    getDescription(): string {
         return this.description;
     }
 
-    getDate() {
+    getDate(): Date {
         return this.date;
     }
 
-    getTags() {
+    getTags(): Set<string> {
         return this.tags;
     }
 
-    constructor ( name: String, description: String, date: Date ) {
+    constructor ( name: string, description: string, date: Date ) {
         this.name = name;
         this.description = description;
         this.date = date;
+        this.tags = new Set<string>();
     }
 
     //setters for EventEntry variables
-    setName(name: String) {
+    setName(name: string): void {
         this.name = name;
     }
 
-    setDescription(description: String) {
+    setDescription(description: string): void {
         this.description = description;
     }
 
-    setDate(date: Date) {
+    setDate(date: Date): void {
         this.date = date;
     }
 
-    setTags(tags: Set<String>) {
+    setTags(tags: Set<string>): void {
         this.tags = tags;
     }
 
-    addTag ( tag: String ) { //function to add a tag to the event
+    addTag ( tag: string ): void { //function to add a tag to the event
         this.tags.add ( tag );
     }
 
-    removeTag ( tag: String ) { //function to remove a tag from the event
+    removeTag ( tag: string ) { //function to remove a tag from the event
         this.tags.delete ( tag );
     }
 
