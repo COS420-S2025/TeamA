@@ -16,32 +16,33 @@ import { EventEntry } from "./EventEntry";
 
 export class EventList {
 
-    private events: Array<EventEntry>;
+    private events: EventEntry[];
 
     constructor() {
         this.events = [];
     }
 
     //function to add an event to the list
-    addData ( event: EventEntry ) {
-
-        event = new EventEntry ( event.getName(), event.getDescription(), event.getDate() );
+    addEvent ( event: EventEntry ): string {
         this.events.push ( event );
-
         return "Event: " + event.getName() + " Added";
 
     }
 
     //function to remove an event from the list
-    removeData ( index: number ) {
-        
-        for ( let i: number = 0; i < this.events.length; i++ ) {
-            if ( i === index ) {
-                this.events.splice ( i, 1 );
-                return "Event: " + this.events[i].getName() + " Removed";
-            }
+    removeEvent ( index: number ): string {
+        if (index < 0 || index >= this.event.length) {
+            return "Error: Event Not Found";
         }
-        return "Error: Event Not Found";
+        
+        const removedEvent = this.events[index];
+        this.events.splice(index, 1);
+        
+        return "Event: " + removedEvent.getName() + " Removed";
+    }
+
+    getEvents(): EventEntry[] {
+        return this.events;
     }
 
     //function to export the events as an ICS file
