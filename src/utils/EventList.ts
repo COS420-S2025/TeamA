@@ -16,10 +16,10 @@ import { EventEntry } from "./EventEntry";
 
 export class EventList {
 
-    private events: EventEntry[];
+    public events: EventEntry[];
 
-    constructor() {
-        this.events = [];
+    constructor(events: EventEntry[]) {
+        this.events = events;
     }
 
     //function to add an event to the list
@@ -31,7 +31,7 @@ export class EventList {
 
     //function to remove an event from the list
     removeEvent ( index: number ): string {
-        if (index < 0 || index >= this.event.length) {
+        if (index < 0 || index >= this.events.length) {
             return "Error: Event Not Found";
         }
         

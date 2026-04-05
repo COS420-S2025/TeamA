@@ -20,7 +20,6 @@ export async function ParsePdfToText(pondRef: React.RefObject<FilePond | null>) 
             for(let i: number = 0; i < files.length; i++ ) {
                 let text = pdfToText(files[i].file);
                 results.push(await text);
-                console.log(text);
             }
             return results;
     }
