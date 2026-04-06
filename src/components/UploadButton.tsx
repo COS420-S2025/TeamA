@@ -1,6 +1,8 @@
 import { FilePond } from 'react-filepond';
 import { ParsePdfToText } from "../utils/pdfParser";
 import { useNavigate } from "react-router-dom"
+import { TextToParsedResults, ParsedResultsToDate } from '../utils/DateExtraction';
+import { CreateEventList } from '../utils/EventListCreation';
 
 // Chat GPT assited with how to pass the reference and that I needed to create an interface
 interface UploadButtonProps {
@@ -12,9 +14,12 @@ export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element 
     const navigate = useNavigate()
     // Call parsePdfToText Button and
     // Navigate to download page when clicked
-    const handleClick = () => {
-        ParsePdfToText(pondRef)
-        navigate("/downloadPage")
+    const handleClick = async () => {
+        const pdfTextArr = await ParsePdfToText(pondRef);
+        const parsedArr = TextToParsedResults(pdfTextArr);
+        const dateArr = ParsedResultsToDate(parsedArr);
+        const result = CreateEventList(dateArr);
+        navigate("/downloadPage", { state: { result } });
     }
     // 
     return(
