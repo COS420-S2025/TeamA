@@ -1,6 +1,6 @@
 import { TextBox } from './components/TextBox.tsx'
 import { DownloadButton } from './components/DownloadButton.tsx';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router';
 import { AddEventButton } from './components/AddEventButton.tsx';
 import React, { useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';

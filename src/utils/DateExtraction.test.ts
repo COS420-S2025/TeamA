@@ -6,7 +6,7 @@ test ( 'Parses valid date strings', () => {
     const input = ['March 15', 'April 20', 'May 10'];
     const expectedOutput = TextToParsedResults(input);
 
-    expect ( expectedOutput.length ).toBe ( 2 );
+    expect ( expectedOutput.length ).toBe ( 3 );
     expect ( expectedOutput[0].length ).toBeGreaterThan ( 0 );
     expect ( expectedOutput[1].length ).toBeGreaterThan ( 0 );
 });
