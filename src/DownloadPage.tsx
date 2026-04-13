@@ -67,9 +67,6 @@ export function DownloadPage(): React.JSX.Element {
         <button className="Confirm-Edit">Edit Event</button>
       </div>
     </div>
-      <div className='Body'>
-        <DownloadButton calendar={CreateICSFile(result)}/>
-      </div>
       <p className='Footer'>
         An App By: <br />
         <br />
