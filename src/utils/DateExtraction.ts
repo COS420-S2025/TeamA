@@ -5,7 +5,7 @@ export function TextToParsedResults(strArr: string[]): chrono.ParsedResult[][] {
     for (let i: number = 0; i < strArr.length; i++) {
         const results = chrono.strict.parse(strArr[i]);
         const dates = results.filter((result: chrono.ParsedResult): boolean => result.start.isCertain('month') && result.start.isCertain('day') && !result.start.isCertain('meridiem'))
-        //console.log(dates);
+
         parseArr.push(dates);
     }
     return parseArr;
