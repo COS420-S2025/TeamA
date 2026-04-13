@@ -5,8 +5,8 @@ test ( 'Creates event list from input', () => {
     const eventList = CreateEventList(input);
 
     expect ( eventList.getEvents().length ).toBe ( 2 );
-    expect ( eventList.getEvents()[0].getName() ).toBe ( 'name' );
-    expect ( eventList.getEvents()[1].getName() ).toBe ( 'name' );
+    expect ( eventList.getEvents()[0].getName() ).toBe ( 'Assignment' );
+    expect ( eventList.getEvents()[1].getName() ).toBe ( 'Assignment' );
 });
 
 test ( 'Handles empty input', () => {
@@ -19,8 +19,8 @@ test ( 'Creates events with correct properties', () => {
     const eventList = CreateEventList([input]);
 
     const event = eventList.getEvents()[0];
-    expect ( event.getName() ).toBe ( 'name' );
-    expect ( event.getDescription() ).toBe ( 'description' );
+    expect ( event.getName() ).toBe ( 'Assignment' );
+    expect ( event.getDescription() ).toBe ( 'Description' );
     expect ( event.getDate() ).toBe ( input );
 
 });
