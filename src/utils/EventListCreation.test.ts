@@ -20,6 +20,7 @@ test ( 'Handles empty input', () => {
 
 test ( 'Creates events with correct properties', () => {
     const input = new Date('2024-03-05');
+    input.setHours(12, 0, 0, 0);
     const eventList = CreateEventList([input]);
 
     const event = eventList.getEvents()[0];
