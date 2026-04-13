@@ -19,13 +19,6 @@ export function DownloadPage(): React.JSX.Element {
   const [date2, setDate2] = useState<string>("");
   const [tags2, setTags2] = useState<string>("");
 
-  const handleClick = () => {
-    const cal = CreateICSFile(result)
-    for (let i: number = 0; i < cal.events().length; i++)
-      console.log(cal.events()[i].start())
-    // console.log(cal.events())
-  }
-
   return(
     <div className='App'>
       <header className='App-header'>
@@ -34,7 +27,6 @@ export function DownloadPage(): React.JSX.Element {
       <header className='Sub-Header'>
         Add New Event
       </header>
-      <button onClick={handleClick}/>
     <div className="Form-Container">
       <div className="Form-Row">
           <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
