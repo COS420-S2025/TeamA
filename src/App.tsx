@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { Home } from "./HomePage.tsx";
 import { DownloadPage } from './DownloadPage.tsx';
-import './App.css';
 
 function App() {
   return (
