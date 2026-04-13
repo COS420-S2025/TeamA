@@ -1,7 +1,11 @@
 import { CreateEventList } from './EventListCreation';
 
 test ( 'Creates event list from input', () => {
-    const input = [new Date('2024-03-05'), new Date('2024-04-20')];
+    const date1 = new Date('2024-03-05');
+    date1.setHours(12, 0, 0, 0);
+    const date2 = new Date('2024-04-20');
+    date2.setHours(12, 0, 0, 0);
+    const input = [date1, date2];
     const eventList = CreateEventList(input);
 
     expect ( eventList.getEvents().length ).toBe ( 2 );

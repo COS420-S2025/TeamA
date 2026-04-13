@@ -16,7 +16,7 @@ import { EventEntry } from "./EventEntry";
 
 export class EventList {
 
-    public events: EventEntry[];
+    private events: EventEntry[];
 
     constructor(events: EventEntry[]) {
         this.events = events;
