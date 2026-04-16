@@ -14,6 +14,7 @@ export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element 
     const navigate = useNavigate()
     // Call parsePdfToText Button and
     // Navigate to download page when clicked
+    // ChatGPT assited with the state to pass the result to the download page
     const handleClick = async () => {
         const pdfTextArr = await ParsePdfToText(pondRef);
         const parsedArr = TextToParsedResults(pdfTextArr);
