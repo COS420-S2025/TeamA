@@ -2,10 +2,10 @@
 //EventEntry object to store the different events and their corresponding functions
 
 export class EventEntry {
-    public name: string;
-    public description: string;
-    public date: Date;
-    public tags: Set<string>;
+    private name: string;
+    private description: string;
+    private date: Date;
+    private tags: Set<string>;
 
     //getters for EventEntry variables
     getName(): string {
