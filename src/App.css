@@ -184,8 +184,8 @@
 }
 
 .Event-Container {
-  height: 600px;
-  width: 800px;
+  height: 1200px;
+  width: 600px;
   border: 5px solid gray;
   background-color: white;
   border-radius: 50px;
@@ -208,7 +208,7 @@
   border: 5px solid black;
   border-radius: 50px;
   margin: 10px;
-  width: 700px;
+  width: 550px;
 
   min-height: 150px;
   box-sizing: border-box;
