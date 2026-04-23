@@ -6,6 +6,7 @@ type DownloadButtonProps = {
 
 export function DownloadButton({ calendar }: DownloadButtonProps): React.JSX.Element {
     const handleClick = () => {
+        // ChatGPT assisted with how to implement the downlaod file feature
         const icsContent = calendar.toString();
         const blob = new Blob([icsContent], { type: 'text/calendar' });
         const url = URL.createObjectURL(blob);

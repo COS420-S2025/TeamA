@@ -13,7 +13,7 @@ export function Home(): React.JSX.Element {
           Welcome to Semester Sort
       </header>
       <header className="App-Description">
-          Upload your course syllabu and build an exportable schdule to add to your calendar
+          Upload your course syllabus and build an exportable schdule to add to your calendar
       </header>
       <div className='OfficeHoursBox'>
         <OfficeHoursBox/>

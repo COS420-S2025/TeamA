@@ -5,7 +5,7 @@ import { EventList } from "./utils/EventList";
 
 function renderWithRouter() {
   const fakeEventList = new EventList( [] );
-  fakeEventList.events = []; // or leave default if constructor sets it
+  const events = fakeEventList.getEvents(); // or leave default if constructor sets it
 
   return render(
     <MemoryRouter
