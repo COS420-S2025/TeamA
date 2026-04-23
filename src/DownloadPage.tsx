@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import { AddEventButton } from './components/AddEventButton.tsx';
 import React, { useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
+import { saveData } from './utils/FireBase.ts';
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
@@ -24,6 +25,7 @@ export function DownloadPage(): React.JSX.Element {
       <header className='App-header'>
         Download Page
       </header>
+      <button onClick={() => saveData("id1", result)}> click </button>
       <header className='Sub-Header'>
         Add New Event
       </header>

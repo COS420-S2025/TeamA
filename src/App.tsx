@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { Home } from "./HomePage.tsx";
 import { DownloadPage } from './DownloadPage.tsx';
 import './App.css';
+import { SignUpPage } from "./SignUpPage.tsx";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
     <BrowserRouter>
     {/* Set up Routes */}
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<SignUpPage/>} />
+        <Route path="/Home" element={<Home/>} />
         <Route path="/DownloadPage" element={<DownloadPage/>} />
       </Routes>
     </BrowserRouter>

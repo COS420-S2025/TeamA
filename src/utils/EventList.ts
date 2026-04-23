@@ -45,9 +45,4 @@ export class EventList {
         return this.events;
     }
 
-    //function to export the events as an ICS file
-    exportAsICS() { //function to export the events as an ICS file
-        return 0;
-    }
-
 }
