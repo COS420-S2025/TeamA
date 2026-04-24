@@ -9,15 +9,15 @@ interface PdfViewProps {
 // PdfView function consists of two buttons to cycle through pdf's
 // as well as the pdf view itself which displays the pdf to the user
 
-export function PdfView({ files }: PdfViewProps): React.JSX.Element {
+export function PdfView({ files }: PdfViewProps): React.JSX.Element{
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [fileURL, setFileURL] = useState<string>("");
+    const [fileURL, setFileURL] = useState<string | null>(null);
 
     const file = files[currentIndex]
 
 
     useEffect(() => {
-            if (files.length === 0) {
+            if (!file) {
                 return 
             }
             const url = URL.createObjectURL(file);
