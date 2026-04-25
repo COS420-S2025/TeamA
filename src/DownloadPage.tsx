@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import { AddEventButton } from './components/AddEventButton.tsx';
 import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
+import { saveData } from './utils/FireBase.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
 
@@ -24,10 +25,10 @@ export function DownloadPage(): React.JSX.Element {
 
   useEffect(() => {
     if (selectedEvent){
-      setName2(selectedEvent.name)
-      setDescription2(selectedEvent.description)
-      setDate2(selectedEvent.date.toString())
-      setTags2(Array.from(selectedEvent.tags).join(", "))
+      setName2(selectedEvent.getName())
+      setDescription2(selectedEvent.getDescription())
+      setDate2(selectedEvent.getDate().toString())
+      setTags2(Array.from(selectedEvent.getTags()).join(", "))
     }
   }, [selectedEvent])
   
@@ -38,6 +39,15 @@ export function DownloadPage(): React.JSX.Element {
       <header className='App-header'>
         Download Page
       </header>
+      <button onClick={() => saveData("id1", result)}> click </button>
+      <header className='Sub-Header'>
+        Add New Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+      </div>
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
@@ -77,7 +87,7 @@ export function DownloadPage(): React.JSX.Element {
         </div>
       </div>
       <ScheduleBar eventlist={result} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
-    </div>
+      </div>
       <div className='Body'>
         <DownloadButton calendar={CreateICSFile(result)}/>
       </div>
@@ -89,6 +99,7 @@ export function DownloadPage(): React.JSX.Element {
         <br />
         Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
       </p>
+      </div>
     </div>
   )
 }
