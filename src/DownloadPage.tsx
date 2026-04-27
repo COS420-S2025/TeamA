@@ -6,10 +6,13 @@ import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
+import { PdfView } from './components/PdfView.tsx';
+
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
   const result = location.state?.result;
+  const files = location.state?.files;
 
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
@@ -41,6 +44,7 @@ export function DownloadPage(): React.JSX.Element {
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
+          <PdfView files={files}/>
           <header className='Sub-Header'>
             Add New Event
           </header>
