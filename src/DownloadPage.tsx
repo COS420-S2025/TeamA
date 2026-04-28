@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
+import { PdfView } from './components/PdfView.tsx';
+import AppLogo from './assets/AppLogo.png'
+
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
@@ -21,6 +24,7 @@ export function DownloadPage(): React.JSX.Element {
   const [description2, setDescription2] = useState<string>("");
   const [date2, setDate2] = useState<string>("");
   const [tags2, setTags2] = useState<string>("");
+  
 
   useEffect(() => {
     if (selectedEvent){
@@ -30,12 +34,14 @@ export function DownloadPage(): React.JSX.Element {
       setTags2(Array.from(selectedEvent.tags).join(", "))
     }
   }, [selectedEvent])
-  
 
 
   return(
     <div className='App'>
       <header className='App-header'>
+        <div className='DownLogo'>
+            <img src={AppLogo} alt=''/>
+        </div>
         Download Page
       </header>
     <div className='Form-Row'>
@@ -84,11 +90,13 @@ export function DownloadPage(): React.JSX.Element {
       <div>
         
       </div>
-      <p className='Footer'>
-        An App By: <br />
-        <br />
-        Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
-      </p>
+      <div className='Footer'>
+        <div className='Foot-Header'>
+          An App By: <br />
+          <br />
+          Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
+        </div>
+      </div>
     </div>
   )
 }

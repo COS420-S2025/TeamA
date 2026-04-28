@@ -1,4 +1,5 @@
 import { EventEntry } from "../utils/EventEntry";
+import RemoveButton from '../assets/RemoveButton.png'
 
 
 
@@ -22,6 +23,9 @@ export function EventCard({
 
                 <p className="Event-Description">
                     {event.description}</p>
+                    <button>
+                        <img src={RemoveButton} alt=''/>
+                    </button>
             </button>
     );
 }
