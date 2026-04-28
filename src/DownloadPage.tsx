@@ -6,13 +6,22 @@ import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
+import { EventList } from './utils/EventList.ts';
 import { PdfView } from './components/PdfView.tsx';
 
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
-  const result = location.state?.result;
+  const result = location.state?.result as EventList | undefined;
   const files = location.state?.files;
+  const [eventList] = useState<EventList>(() => {//function fixed by cursor
+    if (result) {
+      Object.setPrototypeOf(result, EventList.prototype);
+      return result;
+    }
+    return new EventList([]);
+  });
+  const [, setScheduleVersion] = useState(0);
 
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
@@ -57,8 +66,14 @@ export function DownloadPage(): React.JSX.Element {
               <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description1} onChange={setDescription1} />
               <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
           </div>
-          <div className="Form-Row">
-            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} />
+          <div className="Form-Row"> 
+            <AddEventButton //function fixed by cursor
+              eventList={eventList}
+              name={name1}
+              description={description1}
+              date={new Date(date1)}
+              onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
+            />
           </div>
         </div>
         <div className="Form-Container">
@@ -80,10 +95,10 @@ export function DownloadPage(): React.JSX.Element {
           </div>
         </div>
       </div>
-      <ScheduleBar eventlist={result} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
+      <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
     </div>
       <div className='Body'>
-        <DownloadButton calendar={CreateICSFile(result)}/>
+        <DownloadButton calendar={CreateICSFile(eventList)}/>
       </div>
       <div>
         
