@@ -27,7 +27,6 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
         const parsedArr = TextToParsedResults(pdfTextArr);
         const dateArr = ParsedResultsToDate(parsedArr);
         const result = CreateEventList(dateArr);
-        navigate("/downloadPage", { state: { result, files } });
         if (email != null) {
             saveData(email, result); 
         }
@@ -36,7 +35,7 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
             saveData(email, result);
         }
 
-        navigate("/downloadPage", { state: { result, email} });
+        navigate("/downloadPage", { state: { result, email, files} });
     }
     // 
     return(
