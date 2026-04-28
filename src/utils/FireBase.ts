@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore, collection, getDoc } from "firebase/firestore";
 import { EventList } from "./EventList";
+import { data } from "react-router";
+import { EventEntry } from "./EventEntry";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,4 +29,21 @@ export async function saveData(id: string, eventList: EventList) {
     id: id,
     eventList: events,
   });
+}
+
+export async function loadData(id: string): Promise<EventList> {
+  const date: Date = new Date("04/20/2026")
+  const eventEntryList: EventEntry[] = [new EventEntry("", "", date)]
+  const eventList: EventList = new EventList(eventEntryList)
+  const userRef = doc(db, "users", id);
+  const userSnap = await getDoc(userRef);
+  if(userSnap.exists()) {
+    const dataObject = userSnap.data();
+    console.log(dataObject)
+
+  }
+  else {
+    console.log("Error")
+  }
+  return eventList;
 }

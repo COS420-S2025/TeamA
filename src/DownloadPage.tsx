@@ -4,14 +4,22 @@ import { useLocation } from 'react-router';
 import { AddEventButton } from './components/AddEventButton.tsx';
 import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
-import { saveData } from './utils/FireBase.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
+import { LoadDataButton } from './components/LoadDataButton.tsx';
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
-  const result = location.state?.result;
+  const email = location.state?.email;
+  let result = location.state?.result;
+  let loadedEventList = location.state?.loadedEventList;
 
+  if (loadedEventList != null && result != null) {
+    result.splice();
+    for(let i: number = 0; i < loadedEventList.length; i++) {
+      result.push(loadedEventList[i]);
+    }
+  }
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
   const [date1, setDate1] = useState<string>("");
@@ -32,14 +40,12 @@ export function DownloadPage(): React.JSX.Element {
     }
   }, [selectedEvent])
   
-
-
   return(
     <div className='App'>
       <header className='App-header'>
         Download Page
       </header>
-      <button onClick={() => saveData("id1", result)}> click </button>
+      {/* <button onClick={() => saveData("id1", result)}> click </button> */}
       <header className='Sub-Header'>
         Add New Event
       </header>
@@ -64,7 +70,7 @@ export function DownloadPage(): React.JSX.Element {
               <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
           </div>
           <div className="Form-Row">
-            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} />
+            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} email = {email}/>
           </div>
         </div>
         <div className="Form-Container">
@@ -90,6 +96,7 @@ export function DownloadPage(): React.JSX.Element {
       </div>
       <div className='Body'>
         <DownloadButton calendar={CreateICSFile(result)}/>
+        <LoadDataButton email={email}/>
       </div>
       <div>
         

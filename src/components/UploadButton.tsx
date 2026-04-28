@@ -3,13 +3,15 @@ import { ParsePdfToText } from "../utils/pdfParser";
 import { useNavigate } from "react-router-dom"
 import { TextToParsedResults, ParsedResultsToDate } from '../utils/DateExtraction';
 import { CreateEventList } from '../utils/EventListCreation';
+import { saveData } from '../utils/FireBase';
 
 // Chat GPT assited with how to pass the reference and that I needed to create an interface
 interface UploadButtonProps {
     pondRef: React.RefObject<FilePond | null>;
+    email: string;
 }
 
-export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element {
+export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.Element {
     // Setup navigate
     const navigate = useNavigate()
     // Call parsePdfToText Button and
@@ -20,7 +22,15 @@ export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element 
         const parsedArr = TextToParsedResults(pdfTextArr);
         const dateArr = ParsedResultsToDate(parsedArr);
         const result = CreateEventList(dateArr);
-        navigate("/downloadPage", { state: { result } });
+        if (email != null) {
+            saveData(email, result); 
+        }
+        else {
+            email = "john.doe@domain.org";
+            saveData(email, result);
+        }
+
+        navigate("/downloadPage", { state: { result, email} });
     }
     // 
     return(

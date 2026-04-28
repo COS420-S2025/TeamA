@@ -13,7 +13,7 @@ export function SignUpPage(): React.JSX.Element {
     return(
         <div className="App">
             <div className="Form-Container">
-                <TextBox className="" placeholder='e.g. "user@domain.com"' value={email} onChange={setEmail} />
+                <TextBox className="" placeholder='e.g. "user@domain.com"' value={email.toLowerCase()} onChange={setEmail} />
             </div>
             <button onClick={handleClick}>Sign Up</button>
         </div>
