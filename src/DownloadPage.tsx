@@ -9,14 +9,13 @@ import { EventEntry } from './utils/EventEntry.ts';
 import { PdfView } from './components/PdfView.tsx';
 
 import { LoadDataButton } from './components/LoadDataButton.tsx';
+import { EditEventButton } from './components/EditEventButton.tsx';
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
   const result = location.state?.result;
-  const files = location.state?.files;
-
+  const files = location.state.files;
   const email = location.state?.email;
-  let result = location.state?.result;
   let loadedEventList = location.state?.loadedEventList;
 
   if (loadedEventList != null && result != null) {
@@ -35,6 +34,8 @@ export function DownloadPage(): React.JSX.Element {
   const [description2, setDescription2] = useState<string>("");
   const [date2, setDate2] = useState<string>("");
   const [tags2, setTags2] = useState<string>("");
+
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (selectedEvent){
@@ -62,7 +63,7 @@ export function DownloadPage(): React.JSX.Element {
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
-          <PdfView files={files}/>
+          <PdfView files={files} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
           <header className='Sub-Header'>
             Add New Event
           </header>
@@ -94,7 +95,7 @@ export function DownloadPage(): React.JSX.Element {
           </div>
 
           <div className="Form-Row">
-            <button className="Confirm-Edit">Edit Event</button>
+            <EditEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} email = {email} selectedEvent={selectedEvent} />
           </div>
         </div>
       </div>

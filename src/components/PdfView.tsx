@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 
 interface PdfViewProps {
     files: File[];
+    currentIndex: number;
+    setCurrentIndex: (value: number) => void;
 }
 
 // PdfView function consists of two buttons to cycle through pdf's
 // as well as the pdf view itself which displays the pdf to the user
 
-export function PdfView({ files }: PdfViewProps): React.JSX.Element{
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [fileURL, setFileURL] = useState<string | null>(null);
+export function PdfView({ files, currentIndex, setCurrentIndex }: PdfViewProps): React.JSX.Element{
+    const [fileURL, setFileURL] = useState<string | undefined>(undefined);
 
-    const file = files[currentIndex]
-
+    let file = files[currentIndex]
 
     useEffect(() => {
             if (!file) {

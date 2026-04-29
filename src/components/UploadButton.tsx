@@ -6,7 +6,7 @@ import { CreateEventList } from '../utils/EventListCreation';
 import { saveData } from '../utils/FireBase';
 
 // Chat GPT assited with how to pass the reference and that I needed to create an interface
-interface UploadButtonProps {
+type UploadButtonProps = {
     pondRef: React.RefObject<FilePond | null>;
     email: string;
 }
