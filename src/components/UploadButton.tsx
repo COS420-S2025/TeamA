@@ -30,7 +30,7 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
             saveData(email, result);
         }
 
-        navigate("/downloadPage", { state: { result, email} });
+        navigate("/downloadPage", { state: { result, email, files} });
     }
     // 
     return(
