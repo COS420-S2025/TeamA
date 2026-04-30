@@ -9,15 +9,15 @@ import { EventEntry } from './utils/EventEntry.ts';
 import { PdfView } from './components/PdfView.tsx';
 import AppLogo from './assets/AppLogo.png'
 import { EventList } from './utils/EventList.ts';
-import { PdfView } from './components/PdfView.tsx';
 import { LoadDataButton } from './components/LoadDataButton.tsx';
 
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
-  const result = location.state?.result as EventList | undefined;
   const files = location.state?.files;
   const email = location.state?.email;
+  let result = location.state?.result;
+  let loadedEventList = location.state?.loadedEventList;
   const [eventList] = useState<EventList>(() => {//function fixed by cursor
     if (result) {
       Object.setPrototypeOf(result, EventList.prototype);
@@ -33,6 +33,7 @@ export function DownloadPage(): React.JSX.Element {
       result.push(loadedEventList[i]);
     }
   }
+
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
   const [date1, setDate1] = useState<string>("");
@@ -89,75 +90,67 @@ export function DownloadPage(): React.JSX.Element {
         Download Page
       </header>
       {/* <button onClick={() => saveData("id1", result)}> click </button> */}
-      <header className='Sub-Header'>
-        Add New Event
-      </header>
-    <div className="Form-Container">
-      <div className="Form-Row">
-          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
-          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
-      </div>
-    <div className='Form-Row'>
-      <div className='Form-Container'>
-        <div className="Form-Container">
-          <PdfView files={files}/>
-          <header className='Sub-Header'>
-            Add New Event
-          </header>
-          <div className="Form-Row">
-              <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
-              <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
-          </div>
+      <div className='Form-Row'>
+        <div className='Form-Container'>
+          <div className="Form-Container">
+            <PdfView files={files}/>
+            <header className='Sub-Header'>
+              Add New Event
+            </header>
+            <div className="Form-Row">
+                <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+                <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+            </div>
 
-          <div className="Form-Row">
-              <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description1} onChange={setDescription1} />
-              <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
+            <div className="Form-Row">
+                <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description1} onChange={setDescription1} />
+                <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
+            </div>
+            <div className="Form-Row"> 
+              <AddEventButton //function fixed by cursor
+                eventList={eventList}
+                name={name1}
+                description={description1}
+                date={new Date(date1)}
+                onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
+              />
+            </div>
           </div>
-          <div className="Form-Row"> 
-            <AddEventButton //function fixed by cursor
-              eventList={eventList}
-              name={name1}
-              description={description1}
-              date={new Date(date1)}
-              onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
-            />
+          <div className="Form-Container">
+            <header className='Sub-Header'>
+              Edit Event
+            </header>
+            <div className="Form-Row">
+                <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name2} onChange={setName2} />
+                <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date2} onChange={setDate2} />
+            </div>
+
+            <div className="Form-Row">
+                <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description2} onChange={setDescription2} />
+                <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags2} onChange={setTags2} />
+            </div>
+
+            <div className="Form-Row">
+              <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
+            </div>
           </div>
         </div>
-        <div className="Form-Container">
-          <header className='Sub-Header'>
-            Edit Event
-          </header>
-          <div className="Form-Row">
-              <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name2} onChange={setName2} />
-              <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date2} onChange={setDate2} />
-          </div>
-
-          <div className="Form-Row">
-              <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description2} onChange={setDescription2} />
-              <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags2} onChange={setTags2} />
-          </div>
-
-          <div className="Form-Row">
-            <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
+        <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
+      </div>
+        <div className='Body'>
+          <DownloadButton calendar={CreateICSFile(eventList)}/>
+          <LoadDataButton email={email}/>
+        </div>
+        <div>
+          
+        </div>
+        <div className='Footer'>
+          <div className='Foot-Header'>
+            An App By: <br />
+            <br />
+            Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
           </div>
         </div>
       </div>
-      <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
-    </div>
-      <div className='Body'>
-        <DownloadButton calendar={CreateICSFile(eventList)}/>
-        <LoadDataButton email={email}/>
-      </div>
-      <div>
-        
-      </div>
-      <div className='Footer'>
-        <div className='Foot-Header'>
-          An App By: <br />
-          <br />
-          Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
-        </div>
-      </div>
-    </div>
-  )
-}
+    )
+  }
