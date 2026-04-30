@@ -57,6 +57,7 @@ export function DownloadPage(): React.JSX.Element {
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
+          <PdfView files={files}/>
           <header className='Sub-Header'>
             Add New Event
           </header>

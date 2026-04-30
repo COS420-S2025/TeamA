@@ -18,6 +18,11 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
     // Navigate to download page when clicked
     // ChatGPT assited with the state to pass the result to the download page
     const handleClick = async () => {
+        const pond = pondRef.current
+        if(!pond){
+            return
+        }
+        const files = pond.getFiles().map(fileItem => fileItem.file);
         const pdfTextArr = await ParsePdfToText(pondRef);
         const parsedArr = TextToParsedResults(pdfTextArr);
         const dateArr = ParsedResultsToDate(parsedArr);
