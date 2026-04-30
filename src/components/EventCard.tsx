@@ -11,10 +11,11 @@ export function EventCard({
     onClick: () => void;
     isSelected: boolean
 }) {
+    const tagText = Array.from(event.tags).join(", ");
     return (
             <button className={`Event-Card ${isSelected ? "selected" : ""}`} onClick={onClick}>
                 <div className="Event-Header">
-                    <h3>{ event.name }{ event.tags }</h3>
+                    <h3>{ event.name }{tagText ? ` [${tagText}]` : ""}</h3>
                     <span className="Event-Date">
                         { event.date.toString() }
                     </span>

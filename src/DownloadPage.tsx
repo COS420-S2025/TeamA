@@ -7,6 +7,7 @@ import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
 import { EventList } from './utils/EventList.ts';
+import { inferTagsFromText, mergeTags, parseUserTags } from './utils/EventTagging.ts';
 import { PdfView } from './components/PdfView.tsx';
 
 
@@ -56,14 +57,10 @@ export function DownloadPage(): React.JSX.Element {
 
     selectedEvent.setName(name2);
     selectedEvent.setDescription(description2);
-    selectedEvent.setTags(
-      new Set(
-        tags2
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter((tag) => tag.length > 0)
-      )
-    );
+    selectedEvent.setTags(mergeTags(
+      inferTagsFromText(name2, description2),
+      parseUserTags(tags2)
+    ));
 
     setScheduleVersion((prev) => prev + 1);
   };
@@ -96,6 +93,7 @@ export function DownloadPage(): React.JSX.Element {
               name={name1}
               description={description1}
               date={new Date(date1)}
+              tags={tags1}
               onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
             />
           </div>

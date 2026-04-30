@@ -1,7 +1,7 @@
 import { FilePond } from 'react-filepond';
 import { ParsePdfToText } from "../utils/pdfParser";
 import { useNavigate } from "react-router-dom"
-import { TextToParsedResults, ParsedResultsToDate } from '../utils/DateExtraction';
+import { TextToParsedResults, ParsedResultsToDateWithContext } from '../utils/DateExtraction';
 import { CreateEventList } from '../utils/EventListCreation';
 
 // Chat GPT assited with how to pass the reference and that I needed to create an interface
@@ -23,7 +23,7 @@ export function UploadButton({ pondRef }: UploadButtonProps): React.JSX.Element 
         const files = pond.getFiles().map(fileItem => fileItem.file);
         const pdfTextArr = await ParsePdfToText(pondRef);
         const parsedArr = TextToParsedResults(pdfTextArr);
-        const dateArr = ParsedResultsToDate(parsedArr);
+        const dateArr = ParsedResultsToDateWithContext(parsedArr, pdfTextArr);
         const result = CreateEventList(dateArr);
         navigate("/downloadPage", { state: { result, files } });
     }

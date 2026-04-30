@@ -21,3 +21,26 @@ export function ParsedResultsToDate(arr: chrono.ParsedResult[][]): Date[] {
     }
     return dateArr;
 }
+
+export type ParsedDateContext = {
+    date: Date;
+    context: string;
+};
+
+export function ParsedResultsToDateWithContext(arr: chrono.ParsedResult[][], strArr: string[]): ParsedDateContext[] {
+    let parsedDateContexts: ParsedDateContext[] = [];
+    for (let i: number = 0; i < arr.length; i++) {
+        for (let j: number = 0; j < arr[i].length; j++) {
+            const result = arr[i][j];
+            if (result !== undefined) {
+                const source = strArr[i] ?? "";
+                const index = result.index ?? source.indexOf(result.text);
+                const start = Math.max(0, index - 80);
+                const end = Math.min(source.length, index + result.text.length + 80);
+                const context = source.slice(start, end);
+                parsedDateContexts.push({ date: result.start.date(), context });
+            }
+        }
+    }
+    return parsedDateContexts;
+}

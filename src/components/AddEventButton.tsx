@@ -1,18 +1,23 @@
 import { EventEntry } from "../utils/EventEntry";
 import { EventList } from "../utils/EventList";
+import { inferTagsFromText, mergeTags, parseUserTags } from "../utils/EventTagging";
 
 type AddEventButtonProps = {
     eventList: EventList;
     name: string;
     description: string;
     date: Date;
+    tags: string;
     onEventAdded?: () => void; //function fixed by cursor
 };
 
-export function AddEventButton( { eventList, name, description, date, onEventAdded }: AddEventButtonProps ): React.JSX.Element {
+export function AddEventButton( { eventList, name, description, date, tags, onEventAdded }: AddEventButtonProps ): React.JSX.Element {
     const handleClick = () => {
         date.setHours(12, 0, 0, 0);
         const event = new EventEntry(name, description, date);
+        const inferredTags = inferTagsFromText(name, description);
+        const userTags = parseUserTags(tags);
+        event.setTags(mergeTags(inferredTags, userTags));
         // ChatGPT helped with the fix of needing to reset the prototype
         Object.setPrototypeOf(eventList, EventList.prototype)
         eventList.addEvent(event);
