@@ -42,7 +42,31 @@ export function DownloadPage(): React.JSX.Element {
       setTags2(Array.from(selectedEvent.tags).join(", "))
     }
   }, [selectedEvent])
-  
+
+  const handleEditEvent = () => { //function fixed by cursor
+    if (!selectedEvent) {
+      return;
+    }
+
+    const parsedDate = new Date(date2);
+    if (!Number.isNaN(parsedDate.getTime())) {
+      parsedDate.setHours(12, 0, 0, 0);
+      selectedEvent.setDate(parsedDate);
+    }
+
+    selectedEvent.setName(name2);
+    selectedEvent.setDescription(description2);
+    selectedEvent.setTags(
+      new Set(
+        tags2
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter((tag) => tag.length > 0)
+      )
+    );
+
+    setScheduleVersion((prev) => prev + 1);
+  };
 
 
   return(
@@ -91,7 +115,7 @@ export function DownloadPage(): React.JSX.Element {
           </div>
 
           <div className="Form-Row">
-            <button className="Confirm-Edit">Edit Event</button>
+            <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
           </div>
         </div>
       </div>
