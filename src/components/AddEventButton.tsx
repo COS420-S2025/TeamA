@@ -3,6 +3,7 @@ import { EventList } from "../utils/EventList";
 <<<<<<< HEAD
 import { inferTagsFromText, mergeTags, parseUserTags } from "../utils/EventTagging";
 =======
+import { saveData } from "../utils/FireBase";
 >>>>>>> f2cd5474355e5763b2277ece89e2955fbf59496f
 
 type AddEventButtonProps = {
