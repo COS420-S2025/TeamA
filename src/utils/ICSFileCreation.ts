@@ -9,7 +9,9 @@ export function CreateICSFile(eventList: EventList): ICalCalendar {
     for(let i: number = 0; i < eventList.getEvents().length; i++) {
         
         const event = eventList.getEvents()[i];
-        Object.setPrototypeOf(event, EventEntry.prototype)
+        if (event != null) {
+            Object.setPrototypeOf(event, EventEntry.prototype)
+        }
         const endTime = new Date(event.getDate());
         endTime.setHours(endTime.getHours() + 1);
         cal.createEvent(
@@ -21,5 +23,6 @@ export function CreateICSFile(eventList: EventList): ICalCalendar {
             }
         )
     }
+    console.log(eventList)
     return cal
 }

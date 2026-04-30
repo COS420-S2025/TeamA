@@ -1,5 +1,6 @@
 import { EventEntry } from "../utils/EventEntry";
 import { EventList } from "../utils/EventList";
+<<<<<<< HEAD
 import { inferTagsFromText, mergeTags, parseUserTags } from "../utils/EventTagging";
 
 type AddEventButtonProps = {

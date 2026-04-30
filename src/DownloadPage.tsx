@@ -9,12 +9,14 @@ import { EventEntry } from './utils/EventEntry.ts';
 import { EventList } from './utils/EventList.ts';
 import { inferTagsFromText, mergeTags, parseUserTags } from './utils/EventTagging.ts';
 import { PdfView } from './components/PdfView.tsx';
+import { LoadDataButton } from './components/LoadDataButton.tsx';
 
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
   const result = location.state?.result as EventList | undefined;
   const files = location.state?.files;
+  const email = location.state?.email;
   const [eventList] = useState<EventList>(() => {//function fixed by cursor
     if (result) {
       Object.setPrototypeOf(result, EventList.prototype);
@@ -24,6 +26,12 @@ export function DownloadPage(): React.JSX.Element {
   });
   const [, setScheduleVersion] = useState(0);
 
+  if (loadedEventList != null && result != null) {
+    result.splice();
+    for(let i: number = 0; i < loadedEventList.length; i++) {
+      result.push(loadedEventList[i]);
+    }
+  }
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
   const [date1, setDate1] = useState<string>("");
@@ -37,10 +45,10 @@ export function DownloadPage(): React.JSX.Element {
 
   useEffect(() => {
     if (selectedEvent){
-      setName2(selectedEvent.name)
-      setDescription2(selectedEvent.description)
-      setDate2(selectedEvent.date.toString())
-      setTags2(Array.from(selectedEvent.tags).join(", "))
+      setName2(selectedEvent.getName())
+      setDescription2(selectedEvent.getDescription())
+      setDate2(selectedEvent.getDate().toString())
+      setTags2(Array.from(selectedEvent.getTags()).join(", "))
     }
   }, [selectedEvent])
 
@@ -71,6 +79,15 @@ export function DownloadPage(): React.JSX.Element {
       <header className='App-header'>
         Download Page
       </header>
+      {/* <button onClick={() => saveData("id1", result)}> click </button> */}
+      <header className='Sub-Header'>
+        Add New Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+      </div>
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
@@ -121,6 +138,7 @@ export function DownloadPage(): React.JSX.Element {
     </div>
       <div className='Body'>
         <DownloadButton calendar={CreateICSFile(eventList)}/>
+        <LoadDataButton email={email}/>
       </div>
       <div>
         
@@ -130,6 +148,7 @@ export function DownloadPage(): React.JSX.Element {
         <br />
         Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
       </p>
+      </div>
     </div>
   )
 }
