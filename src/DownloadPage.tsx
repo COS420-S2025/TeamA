@@ -6,13 +6,24 @@ import React, { useEffect, useState } from "react";
 import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
+import { EventList } from './utils/EventList.ts';
+import { PdfView } from './components/PdfView.tsx';
 import { LoadDataButton } from './components/LoadDataButton.tsx';
+
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
+  const result = location.state?.result as EventList | undefined;
+  const files = location.state?.files;
   const email = location.state?.email;
-  let result = location.state?.result;
-  let loadedEventList = location.state?.loadedEventList;
+  const [eventList] = useState<EventList>(() => {//function fixed by cursor
+    if (result) {
+      Object.setPrototypeOf(result, EventList.prototype);
+      return result;
+    }
+    return new EventList([]);
+  });
+  const [, setScheduleVersion] = useState(0);
 
   if (loadedEventList != null && result != null) {
     result.splice();
@@ -39,7 +50,33 @@ export function DownloadPage(): React.JSX.Element {
       setTags2(Array.from(selectedEvent.getTags()).join(", "))
     }
   }, [selectedEvent])
-  
+
+  const handleEditEvent = () => { //function fixed by cursor
+    if (!selectedEvent) {
+      return;
+    }
+
+    const parsedDate = new Date(date2);
+    if (!Number.isNaN(parsedDate.getTime())) {
+      parsedDate.setHours(12, 0, 0, 0);
+      selectedEvent.setDate(parsedDate);
+    }
+
+    selectedEvent.setName(name2);
+    selectedEvent.setDescription(description2);
+    selectedEvent.setTags(
+      new Set(
+        tags2
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter((tag) => tag.length > 0)
+      )
+    );
+
+    setScheduleVersion((prev) => prev + 1);
+  };
+
+
   return(
     <div className='App'>
       <header className='App-header'>
@@ -70,8 +107,14 @@ export function DownloadPage(): React.JSX.Element {
               <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description1} onChange={setDescription1} />
               <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
           </div>
-          <div className="Form-Row">
-            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} email = {email}/>
+          <div className="Form-Row"> 
+            <AddEventButton //function fixed by cursor
+              eventList={eventList}
+              name={name1}
+              description={description1}
+              date={new Date(date1)}
+              onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
+            />
           </div>
         </div>
         <div className="Form-Container">
@@ -89,14 +132,14 @@ export function DownloadPage(): React.JSX.Element {
           </div>
 
           <div className="Form-Row">
-            <button className="Confirm-Edit">Edit Event</button>
+            <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
           </div>
         </div>
       </div>
-      <ScheduleBar eventlist={result} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
-      </div>
+      <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
+    </div>
       <div className='Body'>
-        <DownloadButton calendar={CreateICSFile(result)}/>
+        <DownloadButton calendar={CreateICSFile(eventList)}/>
         <LoadDataButton email={email}/>
       </div>
       <div>
