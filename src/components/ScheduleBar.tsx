@@ -14,7 +14,7 @@ export default function ScheduleBar({
     selectedEvent: EventEntry | null;
 }) {
 
-    const events = eventlist.events;
+    const events = eventlist.getEvents();
 
     return (
         <div className="Event-Container">

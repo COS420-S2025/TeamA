@@ -5,9 +5,12 @@ import React, { useRef } from 'react';
 import { FilePond } from 'react-filepond';
 import { FileUpload } from './components/FileUpload.tsx';
 import AppLogo from './assets/AppLogo.png'
+import { useLocation } from 'react-router';
 
 export function Home(): React.JSX.Element {
   const pondRef = useRef<FilePond | null>(null);
+  const location = useLocation();
+  const email = location.state?.email;
   return (
     <div className="App">
       <header className="App-header">
