@@ -18,10 +18,13 @@ export function DownloadPage(): React.JSX.Element {
   const email = location.state?.email;
   let result = location.state?.result;
   let loadedEventList = location.state?.loadedEventList;
-  const [eventList] = useState<EventList>(() => {//function fixed by cursor
+  const [eventList, setEventList] = useState<EventList>(() => {//function fixed by cursor
     if (result) {
-      Object.setPrototypeOf(result, EventList.prototype);
-      return result;
+      return new EventList(
+        result.events.map((e: any) =>
+        new EventEntry(e.name, e.description, new Date(e.date))
+      )
+      );
     }
     return new EventList([]);
   });
@@ -135,7 +138,7 @@ export function DownloadPage(): React.JSX.Element {
             </div>
           </div>
         </div>
-        <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
+        <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} setEventList={setEventList}/>
       </div>
         <div className='Body'>
           <DownloadButton calendar={CreateICSFile(eventList)}/>

@@ -231,6 +231,11 @@
   color: rgb(0, 0, 0);
 }
 
+.Remove {
+  background-color: white;
+  border: 0px;
+}
+
 .Confirm-Edit {
   width: 200px;
   height: 30px;
