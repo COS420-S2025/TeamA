@@ -63,6 +63,7 @@ export class EventEntry {
             description: this.description,
             date: this.date.toDateString(),
             tags: strArr
+
         }
     }
 

@@ -3,7 +3,14 @@ import { EventEntry } from "../utils/EventEntry";
 import { EventList } from "../utils/EventList";
 import { EventCard } from "./EventCard"
 
-
+function sameScheduledEvent(selected: EventEntry | null, event: EventEntry): boolean {
+    if (!selected) return false;
+    return (
+        selected.getName() === event.getName() &&
+        selected.getDescription() === event.getDescription() &&
+        selected.getDate().getTime() === event.getDate().getTime()
+    )
+}
 
 export default function ScheduleBar({ 
     eventlist,
@@ -15,24 +22,25 @@ export default function ScheduleBar({
     selectedEvent: EventEntry | null;
 }) {
 
-    const events = eventlist.events;
+    const events = eventlist?.events;
     const navigate = useNavigate()
 
-    const handleClick = () => {
-        setSelectedEvent(selectedEvent);
-        navigate("/DownLoadPage", {state: { selectedEvent }})
+    const handleClick = (event: EventEntry) => {
+        const result = new EventList(events ?? [])
+        setSelectedEvent(event)
+        navigate("/DownloadPage", { state: { selectedEvent: event, result } })
     }
 
     return (
         <div className="Event-Container">
             <h3>Your Schedule</h3>
             <div className="Scroll-Area">
-            {events.map((event, index) => (
+            {events?.map((event, index) => (
                 <EventCard 
                     key={index} 
                     event={event} 
-                    onClick={handleClick} 
-                    isSelected={selectedEvent === event}/>
+                    onClick={() => handleClick(event)} 
+                    isSelected={sameScheduledEvent(selectedEvent, event)}/>
             ))}
             </div>
         </div>

@@ -14,7 +14,7 @@ interface PdfViewProps {
 export function PdfView({ files, currentIndex, setCurrentIndex }: PdfViewProps): React.JSX.Element{
     const [fileURL, setFileURL] = useState<string | undefined>(undefined);
 
-    let file = files[currentIndex]
+    let file = files?.[currentIndex]
 
     useEffect(() => {
             if (!file) {
@@ -24,7 +24,7 @@ export function PdfView({ files, currentIndex, setCurrentIndex }: PdfViewProps):
             setFileURL(url);
 
             return () => URL.revokeObjectURL(url);
-        }, [file, files.length])
+        }, [file, files?.length])
 
     
 

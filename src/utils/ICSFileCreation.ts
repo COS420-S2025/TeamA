@@ -22,6 +22,5 @@ export function CreateICSFile(eventList: EventList): ICalCalendar {
                 }
             )
         }
-        console.log(eventList)
         return cal
 }

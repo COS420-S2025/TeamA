@@ -24,22 +24,28 @@ const db = getFirestore(app);
 
 export async function saveData(id: string, eventList: EventList) {
   const events = eventList.getEvents().map(event => event.toJSON());
-
-  await setDoc(doc(db, "users", id), {
-    id: id,
-    eventList: events,
-  });
+  if (id.length !== 0) {
+    await setDoc(doc(db, "users", id), {
+      id: id,
+      eventList: events,
+    });
+  }
 }
 
 export async function loadData(id: string): Promise<EventList> {
   const date: Date = new Date("04/20/2026")
-  const eventEntryList: EventEntry[] = [new EventEntry("", "", date)]
-  const eventList: EventList = new EventList(eventEntryList)
+  const eventEntryList: EventEntry[] = [new EventEntry("test", "test", date)]
+  let eventList: EventList = new EventList(eventEntryList)
   const userRef = doc(db, "users", id);
   const userSnap = await getDoc(userRef);
   if(userSnap.exists()) {
     const dataObject = userSnap.data();
-    console.log(dataObject)
+    const eventEntryList: EventEntry[] = [];
+    eventList.removeEvent(0)
+    for(let i: number = 0; i < dataObject.eventList.length; i++) {
+      eventEntryList.push(new EventEntry(dataObject.eventList[i].name, dataObject.eventList[i].description, new Date(dataObject.eventList[i].date)));
+    }
+    eventList = new EventList(eventEntryList);
 
   }
   else {

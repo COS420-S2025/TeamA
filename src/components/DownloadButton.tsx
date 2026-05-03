@@ -15,7 +15,6 @@ export function DownloadButton({ calendar }: DownloadButtonProps): React.JSX.Ele
         link.download = 'mycalendar.ics';
         link.click();
         URL.revokeObjectURL(url);
-        console.log(url)
     }
     return(<button onClick={handleClick}>Download ics file</button>)
 }

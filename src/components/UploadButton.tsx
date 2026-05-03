@@ -35,7 +35,7 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
             saveData(email, result);
         }
 
-        navigate("/downloadPage", { state: { result, email, files} });
+        navigate("/DownloadPage", { state: { result, email, files } });
     }
     // 
     return(
