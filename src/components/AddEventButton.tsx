@@ -19,6 +19,7 @@ export function AddEventButton( { eventList, name, description, date, email }: A
         const event = new EventEntry(name, description, date);
         // ChatGPT helped with the fix of needing to reset the prototype
         Object.setPrototypeOf(eventList, EventList.prototype)
+        eventList.setEventEntryPrototype()
         eventList.addEvent(event);
         if (email.length !== 0) {
             console.log("test1")

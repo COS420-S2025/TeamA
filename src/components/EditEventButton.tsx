@@ -14,9 +14,11 @@ type EditEventButtonProps = {
 export function EditEventButton( { eventList, name, description, date, email, selectedEvent }: EditEventButtonProps ): React.JSX.Element {
     const navigate = useNavigate()
     const handleClick = () => {
-        console.log(eventList.getEvents().length)
-        for(let i = 0; i < eventList.getEvents().length; i++) {
-            if (eventList.getEvents()[i].getName() === selectedEvent?.getName() && eventList.getEvents()[i].getDate().toDateString() === selectedEvent?.getDate().toDateString()) {
+        // console.log(eventList.getEvents().length)
+        Object.setPrototypeOf(eventList, EventList.prototype)
+        eventList.setEventEntryPrototype();
+        for(let i = 0; i < eventList.events.length; i++) {
+            if (eventList.getEvents()[i].name === selectedEvent?.getName() && eventList.getEvents()[i].date.toDateString() === selectedEvent?.getDate().toDateString()) {
                 console.log("yes")
                 eventList.getEvents()[i].setName(name);
                 eventList.getEvents()[i].setDescription(description);
@@ -26,8 +28,8 @@ export function EditEventButton( { eventList, name, description, date, email, se
                 console.log("edit events:", eventList);
             }
         }
-        const result = eventList;
-        navigate("/DownloadPage", { state: { result } });
+        const loadedEventList = eventList;
+        navigate("/DownloadPage", { state: { loadedEventList } });
     }
     return (
     <button className="Confirm-Edit" onClick={handleClick}>

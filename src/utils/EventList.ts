@@ -46,4 +46,10 @@ export class EventList {
         return this.events;
     }
 
+    setEventEntryPrototype(): void {
+        for (let i = 0; i < this.events.length; i++) {
+            Object.setPrototypeOf(this.events[i], EventEntry.prototype)
+        }
+    }
+
 }
