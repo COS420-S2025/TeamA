@@ -161,7 +161,7 @@ export function DownloadPage(): React.JSX.Element {
             </div>
 
             <div className="Form-Row">
-              <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
+            <EditEventButton eventList={result} name={name2} description={description2} date={new Date(date2)} email = {email} selectedEvent={selectedEvent} />
             </div>
           </div>
         </div>
