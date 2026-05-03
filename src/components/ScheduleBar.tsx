@@ -14,17 +14,10 @@ function sameScheduledEvent(selected: EventEntry | null, event: EventEntry): boo
 
 export default function ScheduleBar({ 
     eventlist,
-    setEventList,
     setSelectedEvent,
     selectedEvent 
 }:  {
     eventlist: EventList;
-    setEventList: React.Dispatch<React.SetStateAction<EventList>>;
-    setSelectedEvent: (event: EventEntry) => void;
-    selectedEvent: EventEntry | null;
-}) {
-
-    const events = eventlist.getEvents();
     setSelectedEvent: (event: EventEntry | null) => void;
     selectedEvent: EventEntry | null;
 }) {
@@ -42,10 +35,6 @@ export default function ScheduleBar({
         <div className="Event-Container">
             <h3>Your Schedule</h3>
             <div className="Scroll-Area">
-            {events.map((event, index) => (
-                <EventCard
-                    setEventList={setEventList}
-                    eventList={eventlist}
             {events?.map((event, index) => (
                 <EventCard 
                     key={index} 

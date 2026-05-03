@@ -8,10 +8,9 @@ type AddEventButtonProps = {
     name: string;
     description: string;
     date: Date;
-    onEventAdded?: () => void; //function fixed by cursor
+    email: string;
 };
 
-export function AddEventButton( { eventList, name, description, date, onEventAdded }: AddEventButtonProps ): React.JSX.Element {
 export function AddEventButton( { eventList, name, description, date, email }: AddEventButtonProps ): React.JSX.Element {
     const navigate = useNavigate()
     const handleClick = () => {
@@ -20,8 +19,6 @@ export function AddEventButton( { eventList, name, description, date, email }: A
         // ChatGPT helped with the fix of needing to reset the prototype
         Object.setPrototypeOf(eventList, EventList.prototype)
         eventList.addEvent(event);
-        onEventAdded?.();
-        console.log(eventList)
         if (email != null) {
             saveData(email, eventList)
         }
