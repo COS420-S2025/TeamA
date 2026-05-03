@@ -10,6 +10,8 @@ import { PdfView } from './components/PdfView.tsx';
 import AppLogo from './assets/AppLogo.png'
 import { EventList } from './utils/EventList.ts';
 import { LoadDataButton } from './components/LoadDataButton.tsx';
+import { EditEventButton } from './components/EditEventButton.tsx';
+import { EventList } from "./utils/EventList";
 
 
 export function DownloadPage(): React.JSX.Element {
@@ -34,7 +36,20 @@ export function DownloadPage(): React.JSX.Element {
     result.splice();
     for(let i: number = 0; i < loadedEventList.length; i++) {
       result.push(loadedEventList[i]);
+  // const result = location.state?.result;
+  const files = location.state?.files;
+  const passedEmail = location.state?.email;
+  let loadedEventList = location.state?.loadedEventList;
+  const eventEntryList: EventEntry[] = [];
+  let result: EventList;
+  if (loadedEventList != null) {
+    for(let i: number = 0; i < loadedEventList.events.length; i++) {
+      eventEntryList.push(new EventEntry(loadedEventList.events[i].name, loadedEventList.events[i].description, loadedEventList.events[i].date));
     }
+    result = new EventList(eventEntryList);
+  }
+  else {
+    result = location.state?.result;
   }
 
   const [name1, setName1] = useState<string>("");
@@ -42,12 +57,27 @@ export function DownloadPage(): React.JSX.Element {
   const [date1, setDate1] = useState<string>("");
   const [tags1, setTags1] = useState<string>("");
 
-  const [selectedEvent, setSelectedEvent] = useState<EventEntry | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventEntry | null>(() =>
+    result?.events?.length ? result.events[0] : null
+  )
   const [name2, setName2] = useState<string>("");
   const [description2, setDescription2] = useState<string>("");
   const [date2, setDate2] = useState<string>("");
   const [tags2, setTags2] = useState<string>("");
   
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [email, setEmail] = useState<string>("");
+  
+  // cursor fixed an error that was causing an infinite rerender loop.
+  // The fix was to call setEmail in a useEffect rather than just calling
+  // setEmail
+  useEffect(() => {
+    if (typeof passedEmail === "string") {
+      setEmail(passedEmail);
+    }
+  }, [passedEmail]);
 
   useEffect(() => {
     if (selectedEvent){
@@ -104,6 +134,25 @@ export function DownloadPage(): React.JSX.Element {
                 <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
                 <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
             </div>
+      <header className='Sub-Header'>
+        Add New Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+      </div>
+    <div className='Form-Row'>
+      <div className='Form-Container'>
+        <div className="Form-Container">
+          <PdfView files={files} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
+          <header className='Sub-Header'>
+            Add New Event
+          </header>
+          <div className="Form-Row">
+              <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+              <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+          </div>
 
             <div className="Form-Row">
                 <TextBox className="Description-Box" placeholder='e.g. "Simple C for-loop"'  value={description1} onChange={setDescription1} />
@@ -136,6 +185,8 @@ export function DownloadPage(): React.JSX.Element {
             <div className="Form-Row">
               <button className="Confirm-Edit" onClick={handleEditEvent}>Edit Event</button>
             </div>
+          <div className="Form-Row">
+            <EditEventButton eventList={result} name={name2} description={description2} date={new Date(date2)} email = {email} selectedEvent={selectedEvent} />
           </div>
         </div>
         <ScheduleBar eventlist={eventList} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} setEventList={setEventList}/>

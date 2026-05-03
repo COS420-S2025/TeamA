@@ -6,6 +6,7 @@ import { FilePond } from 'react-filepond';
 import { FileUpload } from './components/FileUpload.tsx';
 import AppLogo from './assets/AppLogo.png'
 import { useLocation } from 'react-router';
+import { SkipButton } from './components/SkipButton.tsx';
 
 export function Home(): React.JSX.Element {
   const pondRef = useRef<FilePond | null>(null);
@@ -42,6 +43,16 @@ export function Home(): React.JSX.Element {
           Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
         </div>
       </div>
+      <div className='DropZone'>
+        <FileUpload pondRef={pondRef}/>
+        <UploadButton pondRef={pondRef} email={email}/>
+        <SkipButton pondRef={pondRef} email={email}/>
+      </div>
+      <p className='Footer'>
+        An App By: <br />
+        <br />
+        Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
+      </p>
     </div>
   )
 }

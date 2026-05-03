@@ -6,7 +6,7 @@ import { CreateEventList } from '../utils/EventListCreation';
 import { saveData } from '../utils/FireBase';
 
 // Chat GPT assited with how to pass the reference and that I needed to create an interface
-interface UploadButtonProps {
+type UploadButtonProps = {
     pondRef: React.RefObject<FilePond | null>;
     email: string;
 }
@@ -35,7 +35,7 @@ export function UploadButton({ pondRef, email }: UploadButtonProps): React.JSX.E
             saveData(email, result);
         }
 
-        navigate("/downloadPage", { state: { result, email, files} });
+        navigate("/DownloadPage", { state: { result, email, files } });
     }
     // 
     return(
