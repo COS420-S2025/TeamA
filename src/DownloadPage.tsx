@@ -7,44 +7,80 @@ import { CreateICSFile } from './utils/ICSFileCreation.ts';
 import ScheduleBar from './components/ScheduleBar.tsx';
 import { EventEntry } from './utils/EventEntry.ts';
 import { PdfView } from './components/PdfView.tsx';
-
+import { LoadDataButton } from './components/LoadDataButton.tsx';
+import { EditEventButton } from './components/EditEventButton.tsx';
+import { EventList } from "./utils/EventList";
 
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
-  const result = location.state?.result;
+  // const result = location.state?.result;
   const files = location.state?.files;
-
+  const passedEmail = location.state?.email;
+  let loadedEventList = location.state?.loadedEventList;
+  const eventEntryList: EventEntry[] = [];
+  let result: EventList;
+  if (loadedEventList != null) {
+    for(let i: number = 0; i < loadedEventList.events.length; i++) {
+      eventEntryList.push(new EventEntry(loadedEventList.events[i].name, loadedEventList.events[i].description, loadedEventList.events[i].date));
+    }
+    result = new EventList(eventEntryList);
+  }
+  else {
+    result = location.state?.result;
+  }
   const [name1, setName1] = useState<string>("");
   const [description1, setDescription1] = useState<string>("");
   const [date1, setDate1] = useState<string>("");
   const [tags1, setTags1] = useState<string>("");
 
-  const [selectedEvent, setSelectedEvent] = useState<EventEntry | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventEntry | null>(() =>
+    result?.events?.length ? result.events[0] : null
+  )
   const [name2, setName2] = useState<string>("");
   const [description2, setDescription2] = useState<string>("");
   const [date2, setDate2] = useState<string>("");
   const [tags2, setTags2] = useState<string>("");
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [email, setEmail] = useState<string>("");
+  
+  // cursor fixed an error that was causing an infinite rerender loop.
+  // The fix was to call setEmail in a useEffect rather than just calling
+  // setEmail
+  useEffect(() => {
+    if (typeof passedEmail === "string") {
+      setEmail(passedEmail);
+    }
+  }, [passedEmail]);
+
   useEffect(() => {
     if (selectedEvent){
-      setName2(selectedEvent.name)
-      setDescription2(selectedEvent.description)
-      setDate2(selectedEvent.date.toString())
-      setTags2(Array.from(selectedEvent.tags).join(", "))
+      setName2(selectedEvent.getName())
+      setDescription2(selectedEvent.getDescription())
+      setDate2(selectedEvent.getDate().toString())
+      setTags2(Array.from(selectedEvent.getTags()).join(", "))
     }
   }, [selectedEvent])
   
-
-
   return(
     <div className='App'>
       <header className='App-header'>
         Download Page
       </header>
+      {/* <button onClick={() => saveData("id1", result)}> click </button> */}
+      <header className='Sub-Header'>
+        Add New Event
+      </header>
+    <div className="Form-Container">
+      <div className="Form-Row">
+          <TextBox className="Name-Box" placeholder='e.g. "COS235 HW01"' value={name1} onChange={setName1} />
+          <TextBox className="Date-Box" placeholder="e.g. MM/DD/YYYY"  value={date1} onChange={setDate1} />
+      </div>
     <div className='Form-Row'>
       <div className='Form-Container'>
         <div className="Form-Container">
-          <PdfView files={files}/>
+          <PdfView files={files} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
           <header className='Sub-Header'>
             Add New Event
           </header>
@@ -58,7 +94,7 @@ export function DownloadPage(): React.JSX.Element {
               <TextBox className="Tag-Box" placeholder='e.g. "Assignment"'  value={tags1} onChange={setTags1} />
           </div>
           <div className="Form-Row">
-            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} />
+            <AddEventButton eventList={result} name={name1} description={description1} date={new Date(date1)} email = {email}/>
           </div>
         </div>
         <div className="Form-Container">
@@ -76,14 +112,15 @@ export function DownloadPage(): React.JSX.Element {
           </div>
 
           <div className="Form-Row">
-            <button className="Confirm-Edit">Edit Event</button>
+            <EditEventButton eventList={result} name={name2} description={description2} date={new Date(date2)} email = {email} selectedEvent={selectedEvent} />
           </div>
         </div>
       </div>
       <ScheduleBar eventlist={result} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent}/>
-    </div>
+      </div>
       <div className='Body'>
         <DownloadButton calendar={CreateICSFile(result)}/>
+        <LoadDataButton email={email}/>
       </div>
       <div>
         
@@ -93,6 +130,7 @@ export function DownloadPage(): React.JSX.Element {
         <br />
         Jack Ellingwood, Drew Turgeon, Dawson Ferguson, Nicholas Keenan, John Quinn<br />
       </p>
+      </div>
     </div>
   )
 }

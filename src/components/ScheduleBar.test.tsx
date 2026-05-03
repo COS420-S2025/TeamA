@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react"
 import ScheduleBar from "./ScheduleBar"
 
+jest.mock("react-router", () => ({
+    useNavigate: () => jest.fn(),
+}))
+
 // AI was used in the creation of this file
 
 const events = [
@@ -41,7 +45,7 @@ test("clicking event correclty selects the event", () => {
         setSelectedEvent={selectedEvent}
         selectedEvent={null}
         />
-    );
+    )
     fireEvent.click(screen.getByText(/Event 1/i));
 
     expect(selectedEvent).toHaveBeenCalledWith(events[0]);

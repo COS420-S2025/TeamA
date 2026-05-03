@@ -56,4 +56,15 @@ export class EventEntry {
         this.tags.delete ( tag );
     }
 
+    toJSON() {
+        let strArr: string[] = Array.from(this.tags);
+        return {
+            name: this.name,
+            description: this.description,
+            date: this.date.toDateString(),
+            tags: strArr
+
+        }
+    }
+
 }

@@ -4,9 +4,13 @@ import { UploadButton } from './components/UploadButton.tsx';
 import React, { useRef } from 'react';
 import { FilePond } from 'react-filepond';
 import { FileUpload } from './components/FileUpload.tsx';
+import { useLocation } from 'react-router';
+import { SkipButton } from './components/SkipButton.tsx';
 
 export function Home(): React.JSX.Element {
   const pondRef = useRef<FilePond | null>(null);
+  const location = useLocation();
+  const email = location.state?.email;
   return (
     <div className="App">
       <header className="App-header">
@@ -23,7 +27,8 @@ export function Home(): React.JSX.Element {
       </div>
       <div className='DropZone'>
         <FileUpload pondRef={pondRef}/>
-        <UploadButton pondRef={pondRef}/>
+        <UploadButton pondRef={pondRef} email={email}/>
+        <SkipButton pondRef={pondRef} email={email}/>
       </div>
       <p className='Footer'>
         An App By: <br />
