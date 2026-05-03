@@ -9,12 +9,12 @@ import { EventEntry } from "./EventEntry";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID
+  apiKey: "AIzaSyCKw4McJy9TREZwwgjvQrqb2baXQoU5ow0",
+  authDomain: "semestersort.firebaseapp.com",
+  projectId: "semestersort",
+  storageBucket: "semestersort.firebasestorage.app",
+  messagingSenderId: "20432707143",
+  appId: "1:20432707143:web:4d4119aa718d8d62079b62"
 };
 
 // Initialize Firebase
@@ -41,11 +41,12 @@ export async function loadData(id: string): Promise<EventList> {
   if(userSnap.exists()) {
     const dataObject = userSnap.data();
     const eventEntryList: EventEntry[] = [];
-    eventList.removeEvent(0)
+    eventList.removeEvent(new EventEntry("test", "test", date))
     for(let i: number = 0; i < dataObject.eventList.length; i++) {
       eventEntryList.push(new EventEntry(dataObject.eventList[i].name, dataObject.eventList[i].description, new Date(dataObject.eventList[i].date)));
     }
     eventList = new EventList(eventEntryList);
+    console.log(eventList)
 
   }
   else {

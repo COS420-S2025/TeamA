@@ -14,14 +14,17 @@ type AddEventButtonProps = {
 
 export function AddEventButton( { eventList, name, description, date, email }: AddEventButtonProps ): React.JSX.Element {
     const navigate = useNavigate()
-    const handleClick = () => {
+    const handleClick = async () => {
         date.setHours(12, 0, 0, 0);
         const event = new EventEntry(name, description, date);
         // ChatGPT helped with the fix of needing to reset the prototype
         Object.setPrototypeOf(eventList, EventList.prototype)
         eventList.addEvent(event);
-        if (email != null) {
-            saveData(email, eventList)
+        if (email.length !== 0) {
+            console.log("test1")
+            await saveData(email, eventList)
+            console.log(email)
+            
         }
         else {
             console.log("error no email")

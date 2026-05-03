@@ -17,7 +17,7 @@ import { EditEventButton } from './components/EditEventButton.tsx';
 export function DownloadPage(): React.JSX.Element {
   const location = useLocation();
   const files = location.state?.files;
-  // const result = location.state?.result;
+  let result = location.state?.result;
   const passedEmail = location.state?.email;
   let loadedEventList = location.state?.loadedEventList;
   const [eventList, setEventList] = useState<EventList>(() => {//function fixed by cursor
@@ -32,12 +32,12 @@ export function DownloadPage(): React.JSX.Element {
   });
   const [, setScheduleVersion] = useState(0);
   const eventEntryList: EventEntry[] = [];
-  let result: EventList;
   if (loadedEventList != null) {
     for(let i: number = 0; i < loadedEventList.events.length; i++) {
       eventEntryList.push(new EventEntry(loadedEventList.events[i].name, loadedEventList.events[i].description, loadedEventList.events[i].date));
     }
     result = new EventList(eventEntryList);
+    // setEventList(loadedEventList)
   }
   else {
     result = location.state?.result;
@@ -69,6 +69,11 @@ export function DownloadPage(): React.JSX.Element {
     }
   }, [passedEmail]);
   
+  useEffect(() => {
+    if (loadedEventList != null) {
+      setEventList(loadedEventList);
+    }
+  }, [loadedEventList]);
 
   useEffect(() => {
     if (selectedEvent){
@@ -136,6 +141,7 @@ export function DownloadPage(): React.JSX.Element {
                 name={name1}
                 description={description1}
                 date={new Date(date1)}
+                email={email}
                 onEventAdded={() => setScheduleVersion((prev) => prev + 1)}
               />
             </div>

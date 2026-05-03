@@ -4,7 +4,11 @@ import { EventList } from "../utils/EventList";
 import { EventCard } from "./EventCard"
 
 function sameScheduledEvent(selected: EventEntry | null, event: EventEntry): boolean {
-    if (!selected) return false;
+    if (!selected) {
+        return false;
+    } else {
+        Object.setPrototypeOf(selected, EventEntry.prototype)
+    }
     return (
         selected.getName() === event.getName() &&
         selected.getDescription() === event.getDescription() &&

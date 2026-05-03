@@ -8,7 +8,6 @@ export function SignUpPage(): React.JSX.Element {
     const handleClick = () => {
 
         navigate("/home", { state: { email } });
-
     }   
     return(
         <div className="App">
