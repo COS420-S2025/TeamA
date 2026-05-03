@@ -9,6 +9,7 @@ type AddEventButtonProps = {
     description: string;
     date: Date;
     email: string;
+    onEventAdded?: () => void; //function fixed by cursor
 };
 
 export function AddEventButton( { eventList, name, description, date, email }: AddEventButtonProps ): React.JSX.Element {

@@ -14,15 +14,17 @@ function sameScheduledEvent(selected: EventEntry | null, event: EventEntry): boo
 
 export default function ScheduleBar({ 
     eventlist,
+    setEventList,
     setSelectedEvent,
     selectedEvent 
 }:  {
     eventlist: EventList;
+    setEventList: React.Dispatch<React.SetStateAction<EventList>>;
     setSelectedEvent: (event: EventEntry | null) => void;
     selectedEvent: EventEntry | null;
 }) {
 
-    const events = eventlist?.events;
+    const events = eventlist?.getEvents();
     const navigate = useNavigate()
 
     const handleClick = (event: EventEntry) => {
@@ -36,7 +38,9 @@ export default function ScheduleBar({
             <h3>Your Schedule</h3>
             <div className="Scroll-Area">
             {events?.map((event, index) => (
-                <EventCard 
+                <EventCard
+                    setEventList={setEventList}
+                    eventList={eventlist}
                     key={index} 
                     event={event} 
                     onClick={() => handleClick(event)} 
