@@ -1,13 +1,19 @@
 import { EventEntry } from "../utils/EventEntry";
+import { RemoveEventButton } from "./RemoveEventButton";
+import { EventList } from "../utils/EventList";
 
 
 
 export function EventCard({
     event,
+    eventList,
     onClick,
+    setEventList,
     isSelected
 }: {
+    setEventList: React.Dispatch<React.SetStateAction<EventList>>;
     event: EventEntry;
+    eventList: EventList;
     onClick: () => void;
     isSelected: boolean
 }) {
@@ -22,6 +28,7 @@ export function EventCard({
 
                 <p className="Event-Description">
                     {event.description}</p>
+                    <RemoveEventButton event={event} eventList={eventList} setEventList={setEventList}/>
             </button>
     );
 }
