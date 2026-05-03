@@ -30,16 +30,15 @@ export class EventList {
     }
 
     //function to remove an event from the list
-    removeEvent ( event: EventEntry ): string {
-        const index = this.events.indexOf(event);
-        
-        if (index === -1) {
-            return "Error: Event not found"
+    removeEvent ( index: number ): string {
+        if (index < 0 || index >= this.events.length) {
+            return "Error: Event Not Found";
         }
         
+        const removedEvent = this.events[index];
         this.events.splice(index, 1);
         
-        return "Event: " + event.getName() + " Removed";
+        return "Event: " + removedEvent.getName() + " Removed";
     }
 
     getEvents(): EventEntry[] {
