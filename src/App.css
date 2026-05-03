@@ -1,13 +1,18 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: rgb(255, 255, 255);
 }
 
 .DropZone {
-  background-color: #282c34;
+  background-color: #79BDE8;
   height: 40vh;
   width: 500px;
   margin: auto;
+  border: 2px solid black;
+  border-radius: 2%;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  
 }
 
 .UploadButton {
@@ -17,50 +22,79 @@
 
 .DateTimeDropdown {
   position: relative;
-  top: -20px;
+  top: -30px;
   left: 200px;
-  color: white;
+  color: rgb(0, 0, 0);
+  border: 2px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  padding: 3px;
+  background-color: #79BDE8;
 }
 
 .OfficeHoursBox {
   position: relative;
   top: 0px;
   left: -170px;
-
+  border: 2px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  padding: 3px;
+  background-color: #79BDE8;
+  margin-left: 25px;
 }
 
 .OfficeHoursText {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .Body {
-  background-color: #282c34;
-  height: 40vh;
-  width: 1500px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  background-color: #79BDE8;
+  height: 3vh;
+  width: 200px;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #282c34;
-  padding-top: 20px;
+  padding-top: 3px;
+  margin-left: 200px;
+  padding-bottom: 20px;
+  border: 2px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .Footer {
-  background-color: #282c34;
+  background-color: #082E58;
   height: 20vh;
+  margin-top: 20px;
 }
 
+.Logo {
+  justify-content: left;
+  margin-left: -515px;
+  padding-right: 160px;
+}
+
+.DownLogo {
+  justify-content: left;
+  margin-left: -750px;
+  padding-right: 295px;
+}
+
+
 .App-header {
-  background-color: #282c34;
+  background-color: #082E58;
   height: 10vh;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  
   justify-content: center;
-  font-size: calc(20px + 2vmin);
+  font-size: 80px;
   color: white;
   padding-top: 20px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  padding-bottom: 75px;
+  padding-left: 200px
 }
 
 .App-link {
@@ -80,34 +114,55 @@
 }
 
 .App-Description {
-  background-color: #282c34;
-  height: 30vh;
+  background-color: #082E58;
+  height: 15vh;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   font-size: calc(5px + 2vmin);
   color: white;
-  padding-top: 20px;
+  padding-top: 25px;
 }
 
 .Sub-Header {
-  background-color: #282c34;
+  background-color: #082E58;
+  height: 3vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+  padding-top: 25px;
+  padding-bottom: 15px;
+  width: 413px;
+  border: 2px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+
+}
+
+.Foot-Header {
+  background-color: #082E58;
   height: 3vh;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   font-size: calc(1px + 2vmin);
-  color: white;
+  color: rgb(255, 255, 255);
   padding-top: 50px;
 }
 
 .Form-Container {
+    margin-top: -10px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 0px;
     align-items: center;
+    padding-top: 20px;
 }
 
 
@@ -121,6 +176,11 @@
 
 .Textbox-Container {
     width: 200px;
+    background-color: #79BDE8;
+    padding-bottom: 20px;
+    border: 2px solid black;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
 }
 
 .Textbox-Container {
@@ -160,7 +220,7 @@
 }
 
 .Manual-Add {
-  width: 195px;
+  width: 200px;
   height: 30px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -171,8 +231,13 @@
   color: rgb(0, 0, 0);
 }
 
+.Remove {
+  background-color: white;
+  border: 0px;
+}
+
 .Confirm-Edit {
-  width: 195px;
+  width: 200px;
   height: 30px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -184,6 +249,7 @@
 }
 
 .Event-Container {
+  margin-top: 20px;
   height: 1200px;
   width: 600px;
   border: 5px solid gray;
@@ -205,7 +271,9 @@
 }
 
 .Event-Card {
-  border: 5px solid black;
+  border: 4px solid black;
+  border-bottom: 6px solid black;
+  border-right: 6px solid black;
   border-radius: 50px;
   margin: 10px;
   width: 550px;
@@ -220,11 +288,11 @@
 }
 
 .Event-Card.selected {
-  background-color: rgba(58, 139, 179, 0.651);
+  background-color: #79BDE8;
 }
 
 .Event-Card.selected:hover {
-  background-color: rgba(58, 139, 179, 0.651);
+  background-color: #79BDE8;
 }
 
 .Event-Card:hover {
